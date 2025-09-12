@@ -1,0 +1,59 @@
+graph TB
+    subgraph "Physical Security"
+        DATACENTER[Azure Datacenters]
+        HSM[Hardware Security Modules]
+    end
+    
+    subgraph "Identity & Access"
+        AAD_SEC[Azure AD Security]
+        PIM_SEC[Privileged Identity Mgmt]
+        RBAC_SEC[Role-Based Access Control]
+    end
+    
+    subgraph "Perimeter Security"
+        DDOS[DDoS Protection]
+        FIREWALL[Azure Firewall]
+        WAF_SEC[Web Application Firewall]
+    end
+    
+    subgraph "Network Security"
+        NSG[Network Security Groups]
+        ASG[Application Security Groups]
+        PRIVATE_ENDPOINT[Private Endpoints]
+    end
+    
+    subgraph "Compute Security"
+        VM_EXTENSIONS[Security Extensions]
+        CONTAINER_SEC[Container Security]
+        SERVERLESS_SEC[Serverless Security]
+    end
+    
+    subgraph "Application Security"
+        CODE_ANALYSIS[Static Code Analysis]
+        VULNERABILITY[Vulnerability Scanning]
+        SECRETS_MGMT[Secrets Management]
+    end
+    
+    subgraph "Data Security"
+        ENCRYPTION[Encryption at Rest/Transit]
+        KEY_MANAGEMENT[Key Management]
+        DATA_CLASSIFICATION[Data Classification]
+    end
+    
+    subgraph "Monitoring & Response"
+        SENTINEL_SEC[Azure Sentinel SIEM]
+        SECURITY_CENTER[Security Center]
+        INCIDENT_RESPONSE[Incident Response]
+    end
+    
+    DATACENTER --> AAD_SEC
+    AAD_SEC --> DDOS
+    DDOS --> NSG
+    NSG --> VM_EXTENSIONS
+    VM_EXTENSIONS --> CODE_ANALYSIS
+    CODE_ANALYSIS --> ENCRYPTION
+    ENCRYPTION --> SENTINEL_SEC
+    
+    style DATACENTER fill:#FF6B6B
+    style ENCRYPTION fill:#4ECDC4
+    style SENTINEL_SEC fill:#45B7D1

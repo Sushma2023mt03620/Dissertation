@@ -1,0 +1,31 @@
+flowchart TD
+    A[User Request] --> B{Authentication}
+    B -->|Success| C[Azure AD Token]
+    B -->|Failure| D[Access Denied]
+    
+    C --> E{Conditional Access Check}
+    E -->|Risk Assessment| F{Device Compliance}
+    F -->|Compliant| G{Location Check}
+    F -->|Non-Compliant| H[Require Device Registration]
+    
+    G -->|Valid Location| I{MFA Required?}
+    G -->|Invalid Location| J[Block/Require MFA]
+    
+    I -->|Yes| K[MFA Challenge]
+    I -->|No| L[Authorization Check]
+    
+    K -->|Success| L
+    K -->|Failure| D
+    
+    L --> M{RBAC Evaluation}
+    M --> N{Resource Access Check}
+    N -->|Authorized| O[Grant Access]
+    N -->|Unauthorized| P[Access Denied - Log Event]
+    
+    H --> Q[Remediation Required]
+    J --> R[Enhanced Security Check]
+    
+    style C fill:#90EE90
+    style O fill:#90EE90
+    style D fill:#FFB6C1
+    style P fill:#FFB6C1

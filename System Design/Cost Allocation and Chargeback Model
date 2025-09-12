@@ -1,0 +1,53 @@
+graph TB
+    subgraph "Cost Sources"
+        COMPUTE[Compute Resources]
+        STORAGE[Storage Resources]
+        NETWORKING[Network Resources]
+        SERVICES[Platform Services]
+        SUPPORT[Support Costs]
+    end
+    
+    subgraph "Cost Allocation"
+        TAGGING[Resource Tagging]
+        SUBSCRIPTIONS[Subscription Structure]
+        RESOURCE_GROUPS[Resource Groups]
+        COST_CENTERS[Cost Centers]
+    end
+    
+    subgraph "Cost Analysis"
+        COST_MANAGEMENT[Azure Cost Management]
+        BUDGETS[Budget Management]
+        ANOMALY_DETECTION[Cost Anomaly Detection]
+        FORECASTING[Cost Forecasting]
+    end
+    
+    subgraph "Optimization"
+        RIGHTSIZING[Resource Rightsizing]
+        RESERVED_INSTANCES[Reserved Instances]
+        SPOT_INSTANCES[Spot Instances]
+        AUTO_SCALING[Auto Scaling]
+    end
+    
+    subgraph "Reporting & Chargeback"
+        DEPARTMENTAL_REPORTS[Departmental Reports]
+        PROJECT_COSTING[Project Costing]
+        TREND_ANALYSIS[Trend Analysis]
+        OPTIMIZATION_RECOMMENDATIONS[Recommendations]
+    end
+    
+    COMPUTE --> TAGGING
+    STORAGE --> SUBSCRIPTIONS
+    NETWORKING --> RESOURCE_GROUPS
+    SERVICES --> COST_CENTERS
+    
+    TAGGING --> COST_MANAGEMENT
+    SUBSCRIPTIONS --> BUDGETS
+    RESOURCE_GROUPS --> ANOMALY_DETECTION
+    
+    COST_MANAGEMENT --> RIGHTSIZING
+    BUDGETS --> RESERVED_INSTANCES
+    ANOMALY_DETECTION --> SPOT_INSTANCES
+    
+    RIGHTSIZING --> DEPARTMENTAL_REPORTS
+    RESERVED_INSTANCES --> PROJECT_COSTING
+    SPOT_INSTANCES --> TREND_ANALYSIS

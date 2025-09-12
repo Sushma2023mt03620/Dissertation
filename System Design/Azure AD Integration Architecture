@@ -1,0 +1,45 @@
+graph TB
+    subgraph "On-Premises"
+        ADDS[Active Directory Domain Services]
+        ADFS[AD Federation Services]
+    end
+    
+    subgraph "Azure Active Directory"
+        AAD[Azure AD Tenant]
+        AADC[Azure AD Connect]
+        PIM[Privileged Identity Management]
+        CA[Conditional Access]
+        MFA[Multi-Factor Authentication]
+    end
+    
+    subgraph "Applications"
+        WEBAPP[Web Applications]
+        API[APIs]
+        MOBILE[Mobile Apps]
+    end
+    
+    subgraph "Azure Resources"
+        SUB[Subscriptions]
+        RG[Resource Groups]
+        RESOURCES[Azure Resources]
+    end
+    
+    ADDS --> AADC
+    AADC --> AAD
+    ADFS --> AAD
+    
+    AAD --> PIM
+    AAD --> CA
+    AAD --> MFA
+    
+    CA --> WEBAPP
+    CA --> API
+    CA --> MOBILE
+    
+    PIM --> SUB
+    PIM --> RG
+    PIM --> RESOURCES
+    
+    style AAD fill:#0078d4
+    style PIM fill:#ff6b35
+    style CA fill:#32cd32

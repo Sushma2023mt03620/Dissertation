@@ -1,0 +1,27 @@
+sequenceDiagram
+    participant Vehicle
+    participant IoTEdge
+    participant IoTHub
+    participant EventHub
+    participant StreamAnalytics
+    participant CosmosDB
+    participant AlertSystem
+    
+    Vehicle->>IoTEdge: Telemetry Data (Engine, GPS, etc.)
+    IoTEdge->>IoTEdge: Local Processing & Filtering
+    IoTEdge->>IoTHub: Aggregated Data
+    
+    IoTHub->>EventHub: Route Telemetry Stream
+    EventHub->>StreamAnalytics: Consume Stream
+    
+    StreamAnalytics->>StreamAnalytics: Real-time Analytics
+    
+    alt Critical Alert (Engine Failure)
+        StreamAnalytics->>AlertSystem: Immediate Alert
+        AlertSystem->>Vehicle: Emergency Response
+    else Normal Operation
+        StreamAnalytics->>CosmosDB: Store Processed Data
+    end
+    
+    StreamAnalytics->>StreamAnalytics: Aggregate for ML
+    StreamAnalytics->>CosmosDB: Store ML Training Data

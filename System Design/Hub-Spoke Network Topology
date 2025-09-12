@@ -1,0 +1,70 @@
+graph TB
+    subgraph "Hub VNet (10.0.0.0/16)"
+        subgraph "Shared Services (10.0.10.0/24)"
+            DNS[Private DNS Resolver]
+            NTP[NTP Services]
+            PKI[PKI Services]
+        end
+        
+        subgraph "Gateway Subnet (10.0.0.0/27)"
+            VPNGW[VPN Gateway]
+            ERGW[ExpressRoute GW]
+        end
+        
+        subgraph "Firewall Subnet (10.0.1.0/26)"
+            AZFW[Azure Firewall]
+            WAF[Web Application Firewall]
+        end
+        
+        subgraph "Management Subnet (10.0.2.0/24)"
+            JUMPBOX[Jump Box]
+            MONITOR[Monitoring VMs]
+        end
+    end
+    
+    subgraph "Production Spoke 1 (10.1.0.0/16)"
+        subgraph "Web Tier (10.1.1.0/24)"
+            WEB1[Web Servers]
+        end
+        subgraph "App Tier (10.1.2.0/24)"
+            APP1[Application Servers]
+        end
+        subgraph "Data Tier (10.1.3.0/24)"
+            DB1[Databases]
+        end
+    end
+    
+    subgraph "Production Spoke 2 (10.2.0.0/16)"
+        subgraph "IoT Ingestion (10.2.1.0/24)"
+            IOTHUB[IoT Hub]
+            EVENTHUB[Event Hubs]
+        end
+        subgraph "Stream Processing (10.2.2.0/24)"
+            ASA[Stream Analytics]
+            FUNCTIONS[Azure Functions]
+        end
+        subgraph "Data Lake (10.2.3.0/24)"
+            DATALAKE[Data Lake Storage]
+            SYNAPSE[Synapse Analytics]
+        end
+    end
+    
+    subgraph "Development Spoke (10.10.0.0/16)"
+        subgraph "Dev Environment"
+            DEVWEB[Dev Web Servers]
+            DEVAPP[Dev App Servers]
+            DEVDB[Dev Databases]
+        end
+    end
+    
+    AZFW --> WEB1
+    AZFW --> APP1
+    AZFW --> IOTHUB
+    AZFW --> ASA
+    AZFW --> DEVWEB
+    
+    WEB1 --> APP1
+    APP1 --> DB1
+    IOTHUB --> ASA
+    ASA --> DATALAKE
+    DATALAKE --> SYNAPSE

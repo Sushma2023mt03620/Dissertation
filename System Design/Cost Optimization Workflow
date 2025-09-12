@@ -1,0 +1,23 @@
+sequenceDiagram
+    participant CostMgmt as Cost Management
+    participant Analyzer as Cost Analyzer
+    participant Recommender as Recommendation Engine
+    participant Approver as Budget Owner
+    participant Automation as Auto-Optimization
+    
+    CostMgmt->>Analyzer: Daily Cost Analysis
+    Analyzer->>Analyzer: Identify Anomalies
+    Analyzer->>Recommender: Generate Recommendations
+    
+    Recommender->>Recommender: Calculate Potential Savings
+    
+    alt High Impact Savings (>$10k/month)
+        Recommender->>Approver: Manual Approval Required
+        Approver->>Automation: Approve/Reject
+    else Low Impact Savings (<$10k/month)
+        Recommender->>Automation: Auto-Approve
+    end
+    
+    Automation->>Automation: Implement Changes
+    Automation->>CostMgmt: Update Cost Baselines
+    CostMgmt->>Approver: Savings Report

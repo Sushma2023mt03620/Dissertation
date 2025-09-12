@@ -1,0 +1,40 @@
+graph TB
+    subgraph "Vehicle Performance Dashboard"
+        FLEET_HEALTH[Fleet Health Metrics]
+        ENGINE_PERFORMANCE[Engine Performance]
+        BATTERY_STATUS[Battery Status]
+        MAINTENANCE_ALERTS[Maintenance Alerts]
+    end
+    
+    subgraph "Manufacturing Dashboard"
+        PRODUCTION_METRICS[Production Line Metrics]
+        QUALITY_CONTROL[Quality Control Data]
+        SUPPLY_CHAIN[Supply Chain Status]
+        EQUIPMENT_HEALTH[Equipment Health]
+    end
+    
+    subgraph "IT Operations Dashboard"
+        INFRASTRUCTURE_HEALTH[Infrastructure Health]
+        APPLICATION_PERFORMANCE[Application Performance]
+        SECURITY_POSTURE[Security Posture]
+        COST_ANALYTICS[Cost Analytics]
+    end
+    
+    subgraph "Business Intelligence Dashboard"
+        SALES_ANALYTICS[Sales Analytics]
+        CUSTOMER_INSIGHTS[Customer Insights]
+        MARKET_TRENDS[Market Trends]
+        PREDICTIVE_ANALYTICS[Predictive Analytics]
+    end
+    
+    subgraph "Compliance Dashboard"
+        REGULATORY_COMPLIANCE[Regulatory Compliance]
+        AUDIT_TRAILS[Audit Trails]
+        RISK_ASSESSMENT[Risk Assessment]
+        POLICY_ADHERENCE[Policy Adherence]
+    end
+    
+    FLEET_HEALTH --> PREDICTIVE_ANALYTICS
+    PRODUCTION_METRICS --> BUSINESS_INTELLIGENCE
+    INFRASTRUCTURE_HEALTH --> COST_ANALYTICS
+    REGULATORY_COMPLIANCE --> AUDIT_TRAILS

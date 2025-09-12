@@ -1,0 +1,65 @@
+graph TB
+    subgraph "Data Sources"
+        AZURE_RESOURCES[Azure Resources]
+        APPLICATIONS[Applications]
+        INFRASTRUCTURE[Infrastructure]
+        SECURITY_LOGS[Security Logs]
+        CUSTOM_METRICS[Custom Metrics]
+    end
+    
+    subgraph "Data Collection"
+        DIAGNOSTIC_SETTINGS[Diagnostic Settings]
+        LOG_ANALYTICS_AGENT[Log Analytics Agent]
+        APP_INSIGHTS_SDK[Application Insights SDK]
+        CUSTOM_COLLECTORS[Custom Collectors]
+    end
+    
+    subgraph "Data Processing & Storage"
+        LOG_ANALYTICS[Log Analytics Workspace]
+        APP_INSIGHTS[Application Insights]
+        METRICS_STORE[Azure Metrics]
+        STORAGE_ACCOUNT[Storage Account]
+    end
+    
+    subgraph "Analysis & Intelligence"
+        KQL_QUERIES[KQL Queries]
+        WORKBOOKS[Azure Workbooks]
+        ML_ANOMALY[ML-based Anomaly Detection]
+        CUSTOM_ANALYTICS[Custom Analytics]
+    end
+    
+    subgraph "Alerting & Response"
+        AZURE_ALERTS[Azure Monitor Alerts]
+        ACTION_GROUPS[Action Groups]
+        LOGIC_APPS[Logic Apps]
+        AUTOMATION[Azure Automation]
+    end
+    
+    subgraph "Visualization & Reporting"
+        AZURE_DASHBOARDS[Azure Dashboards]
+        POWER_BI_MONITORING[Power BI]
+        GRAFANA[Grafana]
+        CUSTOM_DASHBOARDS[Custom Dashboards]
+    end
+    
+    AZURE_RESOURCES --> DIAGNOSTIC_SETTINGS
+    APPLICATIONS --> APP_INSIGHTS_SDK
+    INFRASTRUCTURE --> LOG_ANALYTICS_AGENT
+    SECURITY_LOGS --> CUSTOM_COLLECTORS
+    
+    DIAGNOSTIC_SETTINGS --> LOG_ANALYTICS
+    APP_INSIGHTS_SDK --> APP_INSIGHTS
+    LOG_ANALYTICS_AGENT --> LOG_ANALYTICS
+    CUSTOM_COLLECTORS --> STORAGE_ACCOUNT
+    
+    LOG_ANALYTICS --> KQL_QUERIES
+    APP_INSIGHTS --> WORKBOOKS
+    METRICS_STORE --> ML_ANOMALY
+    
+    KQL_QUERIES --> AZURE_ALERTS
+    ML_ANOMALY --> ACTION_GROUPS
+    WORKBOOKS --> LOGIC_APPS
+    
+    AZURE_ALERTS --> AZURE_DASHBOARDS
+    ACTION_GROUPS --> POWER_BI_MONITORING
+    LOGIC_APPS --> GRAFANA

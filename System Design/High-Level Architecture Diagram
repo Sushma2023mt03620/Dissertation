@@ -1,0 +1,69 @@
+graph TB
+    subgraph "On-Premises"
+        CORP[Corporate Network]
+        FACTORY[Manufacturing Plants]
+        DEALERS[Dealer Network]
+    end
+    
+    subgraph "Azure Landing Zone"
+        subgraph "Management Group Hierarchy"
+            ROOT[Root Management Group]
+            PLATFORM[Platform MG]
+            LANDINGZONES[Landing Zones MG]
+            SANDBOX[Sandbox MG]
+        end
+        
+        subgraph "Connectivity Subscription"
+            VWAN[Virtual WAN Hub]
+            AZFW[Azure Firewall]
+            VPNGW[VPN Gateway]
+            ERGW[ExpressRoute Gateway]
+        end
+        
+        subgraph "Management Subscription"
+            LAWS[Log Analytics Workspace]
+            SENTINEL[Azure Sentinel]
+            POLICY[Azure Policy]
+            MONITOR[Azure Monitor]
+        end
+        
+        subgraph "Production Landing Zone"
+            WEBAPP[Web Applications]
+            IOTAPPS[IoT Applications]
+            AIML[AI/ML Platform]
+            DATABASE[Databases]
+        end
+        
+        subgraph "Shared Services"
+            AAD[Azure AD]
+            KEYVAULT[Key Vault]
+            ACR[Container Registry]
+            STORAGE[Shared Storage]
+        end
+    end
+    
+    subgraph "External Services"
+        VEHICLES[Connected Vehicles]
+        SUPPLIERS[Suppliers]
+        CLOUD[Other Cloud Services]
+    end
+    
+    CORP --> ERGW
+    FACTORY --> VPNGW
+    DEALERS --> VPNGW
+    VEHICLES --> IOTAPPS
+    SUPPLIERS --> WEBAPP
+    
+    VWAN --> AZFW
+    AZFW --> WEBAPP
+    AZFW --> IOTAPPS
+    AZFW --> AIML
+    
+    LAWS --> SENTINEL
+    POLICY --> LANDINGZONES
+    MONITOR --> WEBAPP
+    MONITOR --> IOTAPPS
+    
+    AAD --> WEBAPP
+    KEYVAULT --> WEBAPP
+    ACR --> WEBAPP

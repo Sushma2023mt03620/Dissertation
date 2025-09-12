@@ -1,0 +1,66 @@
+graph TB
+    subgraph "Data Sources"
+        VEHICLE_DATA[Vehicle Telemetry]
+        SENSOR_DATA[Sensor Data]
+        HISTORICAL[Historical Data]
+    end
+    
+    subgraph "Data Preparation"
+        DATABRICKS[Azure Databricks]
+        DATA_FACTORY[Data Factory]
+        FEATURE_STORE[Feature Store]
+    end
+    
+    subgraph "ML Development"
+        AML_WORKSPACE[ML Workspace]
+        COMPUTE_CLUSTER[Compute Clusters]
+        NOTEBOOKS[Jupyter Notebooks]
+    end
+    
+    subgraph "Model Training"
+        AUTOML[AutoML]
+        CUSTOM_MODELS[Custom Models]
+        HYPERPARAMETER[Hyperparameter Tuning]
+    end
+    
+    subgraph "Model Management"
+        MODEL_REGISTRY[Model Registry]
+        MODEL_VERSIONING[Version Control]
+        MODEL_VALIDATION[Model Validation]
+    end
+    
+    subgraph "Deployment"
+        ACI[Container Instances]
+        AKS[Kubernetes Service]
+        IOT_EDGE[IoT Edge Deployment]
+    end
+    
+    subgraph "Monitoring"
+        APP_INSIGHTS[Application Insights]
+        MODEL_MONITORING[Model Drift Detection]
+        PERFORMANCE[Performance Metrics]
+    end
+    
+    VEHICLE_DATA --> DATA_FACTORY
+    SENSOR_DATA --> DATA_FACTORY
+    HISTORICAL --> DATABRICKS
+    
+    DATA_FACTORY --> FEATURE_STORE
+    DATABRICKS --> FEATURE_STORE
+    
+    FEATURE_STORE --> AML_WORKSPACE
+    AML_WORKSPACE --> COMPUTE_CLUSTER
+    COMPUTE_CLUSTER --> AUTOML
+    COMPUTE_CLUSTER --> CUSTOM_MODELS
+    
+    AUTOML --> MODEL_REGISTRY
+    CUSTOM_MODELS --> MODEL_REGISTRY
+    
+    MODEL_REGISTRY --> MODEL_VALIDATION
+    MODEL_VALIDATION --> ACI
+    MODEL_VALIDATION --> AKS
+    MODEL_VALIDATION --> IOT_EDGE
+    
+    ACI --> APP_INSIGHTS
+    AKS --> MODEL_MONITORING
+    IOT_EDGE --> PERFORMANCE

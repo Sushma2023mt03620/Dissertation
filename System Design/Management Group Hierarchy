@@ -1,0 +1,29 @@
+graph TD
+    ROOT[Automotive Root MG] --> PLATFORM[Platform MG]
+    ROOT --> LANDINGZONES[Landing Zones MG]
+    ROOT --> SANDBOX[Sandbox MG]
+    ROOT --> DECOMMISSIONED[Decommissioned MG]
+    
+    PLATFORM --> MGMT[Management]
+    PLATFORM --> CONN[Connectivity]
+    PLATFORM --> IDENTITY[Identity]
+    
+    LANDINGZONES --> CORP[Corp Landing Zone]
+    LANDINGZONES --> ONLINE[Online Landing Zone]
+    
+    CORP --> CPROD[Corp Production]
+    CORP --> CSTAGE[Corp Staging]
+    CORP --> CDEV[Corp Development]
+    
+    ONLINE --> OPROD[Online Production]
+    ONLINE --> OSTAGE[Online Staging]
+    ONLINE --> ODEV[Online Development]
+    
+    SANDBOX --> INNOV[Innovation Lab]
+    SANDBOX --> TRAINING[Training]
+    SANDBOX --> POC[Proof of Concept]
+    
+    style ROOT fill:#ff6b6b
+    style PLATFORM fill:#4ecdc4
+    style LANDINGZONES fill:#45b7d1
+    style SANDBOX fill:#96ceb4

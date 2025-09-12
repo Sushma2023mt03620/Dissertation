@@ -1,0 +1,33 @@
+sequenceDiagram
+    participant Client
+    participant WAF as Web Application Firewall
+    participant AZFW as Azure Firewall
+    participant NSG as Network Security Group
+    participant APP as Application
+    participant DB as Database
+    
+    Client->>WAF: HTTPS Request
+    WAF->>WAF: Inspect Application Layer
+    
+    alt Malicious Request
+        WAF->>Client: Block & Log
+    else Clean Request
+        WAF->>AZFW: Forward Request
+    end
+    
+    AZFW->>AZFW: Network Layer Inspection
+    
+    alt Blocked by Firewall Rules
+        AZFW->>WAF: Deny
+        WAF->>Client: 403 Forbidden
+    else Allowed by Rules
+        AZFW->>NSG: Forward to Subnet
+    end
+    
+    NSG->>NSG: Subnet Level Filtering
+    NSG->>APP: Deliver Request
+    
+    APP->>NSG: Database Connection Request
+    NSG->>DB: Allow Internal Communication
+    DB->>APP: Response
+    APP->>Client: Application Response

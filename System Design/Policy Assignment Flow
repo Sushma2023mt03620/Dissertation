@@ -1,0 +1,24 @@
+flowchart TD
+    A[Root Management Group] --> B{Policy Type}
+    B -->|Security Baseline| C[Security Policies]
+    B -->|Compliance| D[Regulatory Policies]
+    B -->|Cost Management| E[Financial Policies]
+    B -->|Operational| F[Operational Policies]
+    
+    C --> G[All Subscriptions]
+    D --> H[Production Only]
+    E --> I[All Non-Sandbox]
+    F --> J[Platform Services]
+    
+    G --> K[Policy Compliance Check]
+    H --> K
+    I --> K
+    J --> K
+    
+    K --> L{Compliant?}
+    L -->|Yes| M[Allow Deployment]
+    L -->|No| N[Block & Alert]
+    
+    N --> O[Remediation Required]
+    O --> P[Policy Update/Exception]
+    P --> K

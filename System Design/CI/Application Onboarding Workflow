@@ -1,0 +1,27 @@
+sequenceDiagram
+    participant DevTeam as Development Team
+    participant Portal as Self-Service Portal
+    participant Pipeline as Automation Pipeline
+    participant Governance as Governance Engine
+    participant Landing as Landing Zone
+    
+    DevTeam->>Portal: Request New Environment
+    Portal->>Portal: Validate Request
+    Portal->>Governance: Check Policies
+    
+    Governance->>Governance: Compliance Validation
+    
+    alt Policy Compliant
+        Governance->>Pipeline: Approve Provisioning
+        Pipeline->>Pipeline: Generate IaC Templates
+        Pipeline->>Landing: Deploy Infrastructure
+        Landing->>Portal: Environment Ready
+        Portal->>DevTeam: Access Credentials
+    else Policy Violation
+        Governance->>Portal: Request Rejected
+        Portal->>DevTeam: Remediation Required
+    end
+    
+    DevTeam->>Landing: Deploy Application
+    Landing->>Portal: Update Status
+    Portal->>DevTeam: Deployment Complete

@@ -1,0 +1,64 @@
+graph TB
+    subgraph "Connected Vehicles"
+        CAR1[Vehicle Fleet 1]
+        CAR2[Vehicle Fleet 2]
+        CAR3[Vehicle Fleet 3]
+    end
+    
+    subgraph "Edge Processing"
+        EDGE[IoT Edge Devices]
+        EDGE_ANALYTICS[Edge Analytics]
+    end
+    
+    subgraph "Azure IoT Platform"
+        IOTHUB[IoT Hub]
+        DPS[Device Provisioning Service]
+        DEVICETWINS[Device Twins]
+    end
+    
+    subgraph "Stream Processing"
+        EVENTHUBS[Event Hubs]
+        STREAMANALYTICS[Stream Analytics]
+        FUNCTIONS[Azure Functions]
+    end
+    
+    subgraph "Data Storage"
+        HOT[Hot Path - Cosmos DB]
+        WARM[Warm Path - SQL Database]
+        COLD[Cold Path - Data Lake]
+    end
+    
+    subgraph "Analytics & AI"
+        SYNAPSE[Synapse Analytics]
+        AML[Azure Machine Learning]
+        POWERBI[Power BI]
+    end
+    
+    CAR1 --> EDGE
+    CAR2 --> EDGE
+    CAR3 --> EDGE
+    
+    EDGE --> EDGE_ANALYTICS
+    EDGE_ANALYTICS --> IOTHUB
+    
+    DPS --> DEVICETWINS
+    DEVICETWINS --> IOTHUB
+    
+    IOTHUB --> EVENTHUBS
+    EVENTHUBS --> STREAMANALYTICS
+    EVENTHUBS --> FUNCTIONS
+    
+    STREAMANALYTICS --> HOT
+    STREAMANALYTICS --> WARM
+    FUNCTIONS --> COLD
+    
+    HOT --> SYNAPSE
+    WARM --> SYNAPSE
+    COLD --> SYNAPSE
+    
+    SYNAPSE --> AML
+    SYNAPSE --> POWERBI
+    
+    style IOTHUB fill:#4CAF50
+    style STREAMANALYTICS fill:#FF9800
+    style SYNAPSE fill:#9C27B0

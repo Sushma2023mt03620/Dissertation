@@ -1,0 +1,52 @@
+graph TB
+    subgraph "Source Control"
+        GIT[Git Repository]
+        BRANCH[Feature Branches]
+        MAIN[Main Branch]
+        RELEASE[Release Branch]
+    end
+    
+    subgraph "Build Pipeline"
+        VALIDATE[Terraform Validate]
+        LINT[Code Linting]
+        SECURITY_SCAN[Security Scan]
+        UNIT_TESTS[Unit Tests]
+    end
+    
+    subgraph "Test Environment"
+        PLAN[Terraform Plan]
+        DEPLOY_TEST[Deploy to Test]
+        INTEGRATION_TESTS[Integration Tests]
+        SECURITY_TESTS[Security Tests]
+    end
+    
+    subgraph "Approval Process"
+        CODE_REVIEW[Code Review]
+        SECURITY_APPROVAL[Security Approval]
+        CHANGE_APPROVAL[Change Advisory Board]
+    end
+    
+    subgraph "Production Deployment"
+        BLUE_GREEN[Blue-Green Deployment]
+        CANARY[Canary Release]
+        ROLLBACK[Rollback Capability]
+        MONITORING[Post-Deploy Monitoring]
+    end
+    
+    GIT --> VALIDATE
+    BRANCH --> LINT
+    VALIDATE --> SECURITY_SCAN
+    LINT --> UNIT_TESTS
+    
+    UNIT_TESTS --> PLAN
+    PLAN --> DEPLOY_TEST
+    DEPLOY_TEST --> INTEGRATION_TESTS
+    
+    INTEGRATION_TESTS --> CODE_REVIEW
+    CODE_REVIEW --> SECURITY_APPROVAL
+    SECURITY_APPROVAL --> CHANGE_APPROVAL
+    
+    CHANGE_APPROVAL --> BLUE_GREEN
+    BLUE_GREEN --> CANARY
+    CANARY --> MONITORING
+    MONITORING --> ROLLBACK

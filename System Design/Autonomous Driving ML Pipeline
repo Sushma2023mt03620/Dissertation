@@ -1,0 +1,26 @@
+sequenceDiagram
+    participant DataIngestion
+    participant FeatureEngineering
+    participant ModelTraining
+    participant ModelValidation
+    participant EdgeDeployment
+    participant Vehicle
+    
+    DataIngestion->>FeatureEngineering: Raw Sensor Data
+    FeatureEngineering->>FeatureEngineering: Data Cleaning & Transformation
+    FeatureEngineering->>ModelTraining: Prepared Features
+    
+    ModelTraining->>ModelTraining: Train Deep Learning Models
+    ModelTraining->>ModelValidation: Trained Model
+    
+    ModelValidation->>ModelValidation: Safety Validation Tests
+    
+    alt Model Passes Validation
+        ModelValidation->>EdgeDeployment: Deploy to Edge
+        EdgeDeployment->>Vehicle: Update Model
+        Vehicle->>DataIngestion: Feedback Data
+    else Model Fails Validation
+        ModelValidation->>ModelTraining: Retrain Required
+    end
+    
+    Note over Vehicle: Real-time inference for<br/>autonomous driving decisions

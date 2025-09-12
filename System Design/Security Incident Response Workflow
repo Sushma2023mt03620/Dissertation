@@ -1,0 +1,39 @@
+flowchart TD
+    A[Security Event Detected] --> B{Event Severity}
+    B -->|Critical| C[Immediate Alert - SOC]
+    B -->|High| D[Priority Alert - Security Team]
+    B -->|Medium/Low| E[Standard Alert - Operations]
+    
+    C --> F[Incident Commander Assigned]
+    D --> G[Senior Security Analyst]
+    E --> H[Security Analyst]
+    
+    F --> I[Immediate Containment]
+    G --> J[Investigation & Analysis]
+    H --> K[Standard Investigation]
+    
+    I --> L[Impact Assessment]
+    J --> L
+    K --> L
+    
+    L --> M{Business Impact?}
+    M -->|High| N[Executive Notification]
+    M -->|Medium| O[Management Notification]
+    M -->|Low| P[Team Notification]
+    
+    N --> Q[Emergency Response Team]
+    O --> R[Security Team Response]
+    P --> S[Standard Response]
+    
+    Q --> T[Remediation Actions]
+    R --> T
+    S --> T
+    
+    T --> U[Post-Incident Review]
+    U --> V[Lessons Learned]
+    V --> W[Security Improvements]
+    
+    style A fill:#FFB6C1
+    style C fill:#FF6B6B
+    style I fill:#FFA500
+    style T fill:#90EE90
