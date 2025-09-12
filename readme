@@ -1,0 +1,15 @@
+terraform/
+├── modules/
+│   ├── management-groups/
+│   ├── subscriptions/
+│   ├── networking/
+│   ├── security/
+│   └── monitoring/
+├── environments/
+│   ├── management/
+│   ├── connectivity/
+│   └── applications/
+└── policies/
+    ├── security-policies/
+    ├── naming-conventions/
+    └── tagging-policies/
