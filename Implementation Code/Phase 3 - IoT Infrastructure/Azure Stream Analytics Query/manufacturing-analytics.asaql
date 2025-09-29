@@ -1,0 +1,40 @@
+-- Real-time anomaly detection
+SELECT
+    DeviceId,
+    System.Timestamp() AS WindowEnd,
+    AVG(Temperature) AS AvgTemperature,
+    MAX(Temperature) AS MaxTemperature,
+    AVG(Vibration) AS AvgVibration,
+    COUNT(*) AS MessageCount
+INTO
+    [anomaly-output]
+FROM
+    [iothub-input]
+TIMESTAMP BY Timestamp
+GROUP BY
+    DeviceId,
+    TumblingWindow(minute, 5)
+HAVING
+    AVG(Temperature) > 85 OR AVG(Vibration) > 8
+
+-- Store all telemetry in Cosmos DB
+SELECT
+    *
+INTO
+    [cosmosdb-output]
+FROM
+    [iothub-input]
+
+-- Real-time dashboard feed
+SELECT
+    DeviceId,
+    Temperature,
+    Vibration,
+    Pressure,
+    Status,
+    System.Timestamp() AS ProcessedTime
+INTO
+    [dashboard-output]
+FROM
+    [iothub-input]
+TIMESTAMP BY Timestamp

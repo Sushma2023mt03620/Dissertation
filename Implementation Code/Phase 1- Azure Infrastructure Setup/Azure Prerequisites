@@ -1,0 +1,11 @@
+# Install Azure CLI
+curl -sL https://aka.ms/InstallAzureCLIDeb | sudo bash
+
+# Login to Azure
+az login
+
+# Set subscription
+az account set --subscription "Your-Subscription-Id"
+
+# Create resource group
+az group create --name rg-automotive-platform --location eastus
