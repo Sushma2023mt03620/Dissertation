@@ -4,7 +4,7 @@ using System.Text;
 namespace Common.Security
 {
     public interface IDataEncryption
-    {
+    { 
         string Encrypt(string plainText);
         string Decrypt(string cipherText);
     }
@@ -52,4 +52,5 @@ namespace Common.Security
             return Encoding.UTF8.GetString(decryptedBytes);
         }
     }
+
 }
