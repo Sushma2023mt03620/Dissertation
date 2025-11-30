@@ -10,7 +10,7 @@ namespace TelematicsService.Controllers
     {
         private readonly TelematicsDbContext _context;
         private readonly IDrivingBehaviorAnalyzer _behaviorAnalyzer;
-        private readonly ILogger<TelematicsController> _logger;
+        private readonly ILogger<TelematicsController> _logger; 
 
         public TelematicsController(
             TelematicsDbContext context,
@@ -113,4 +113,5 @@ namespace TelematicsService.Controllers
             });
         }
     }
+
 }
