@@ -1,7 +1,7 @@
 #!/bin/bash
 
 set -e
-
+ 
 echo "Running database migrations..."
 
 # Get SQL connection details
