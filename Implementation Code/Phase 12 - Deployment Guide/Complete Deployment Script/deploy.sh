@@ -3,7 +3,7 @@
 set -e
 
 echo "========================================="
-echo "Automotive Platform Deployment Script"
+echo "Automotive Platform Deployment Script" 
 echo "========================================="
 
 # Configuration
